@@ -576,10 +576,12 @@ static bool _fle2_mongo_op_markings(mongocrypt_ctx_t *ctx, bson_t *out) {
     BSON_ASSERT(ctx->state == MONGOCRYPT_CTX_NEED_MONGO_MARKINGS);
     BSON_ASSERT(context_uses_fle2(ctx));
 
+    bson_destroy(&cmd_bson);
     if (!_mongocrypt_buffer_to_bson(&ectx->original_cmd, &cmd_bson)) {
         return _mongocrypt_ctx_fail_w_msg(ctx, "unable to convert original_cmd to BSON");
     }
 
+    bson_destroy(&encrypted_field_config_bson);
     if (!_mongocrypt_buffer_to_bson(&ectx->encrypted_field_config, &encrypted_field_config_bson)) {
         return _mongocrypt_ctx_fail_w_msg(ctx, "unable to convert encrypted_field_config to BSON");
     }
