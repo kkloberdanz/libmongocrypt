@@ -423,8 +423,6 @@ bool mc_FLE2RangeFindDriverSpec_to_placeholders(mc_FLE2RangeFindDriverSpec_t *sp
     bson_iter_t indexMin, indexMax;
     bool ok = false;
 
-    bson_init(out);
-
     BCON_APPEND(&infDoc, "p", BCON_DOUBLE(INFINITY), "n", BCON_DOUBLE(-INFINITY));
 
 #define TRY(stmt)                                                                                                      \

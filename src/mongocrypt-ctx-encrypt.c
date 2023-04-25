@@ -1591,7 +1591,6 @@ static bool FLE2RangeFindDriverSpec_to_ciphertexts(mongocrypt_ctx_t *ctx, mongoc
             goto fail;
         }
 
-        bson_destroy(&with_placholders);
         // Convert FLE2RangeFindDriverSpec into a document with placeholders.
         if (!mc_FLE2RangeFindDriverSpec_to_placeholders(
                 &rfds,
