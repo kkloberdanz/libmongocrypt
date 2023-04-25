@@ -651,7 +651,6 @@ static bool _create_markings_cmd_bson(mongocrypt_ctx_t *ctx, bson_t *out) {
     } else {
         bson_t empty = BSON_INITIALIZER;
         BSON_APPEND_DOCUMENT(out, "jsonSchema", &empty);
-        bson_destroy(&empty);
     }
 
     // if a local schema was not set, set isRemoteSchema=true
