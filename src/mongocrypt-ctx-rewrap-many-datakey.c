@@ -20,7 +20,7 @@ static bool _finalize(mongocrypt_ctx_t *ctx, mongocrypt_binary_t *out) {
     _mongocrypt_ctx_rewrap_many_datakey_t *const rmdctx = (_mongocrypt_ctx_rewrap_many_datakey_t *)ctx;
 
     bson_t doc = BSON_INITIALIZER;
-    bson_t array;
+    bson_t array = BSON_INITIALIZER;
 
     BSON_ASSERT_PARAM(ctx);
     BSON_ASSERT_PARAM(out);

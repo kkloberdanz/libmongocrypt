@@ -566,8 +566,7 @@ static bool _mongo_done_collinfo(mongocrypt_ctx_t *ctx) {
 
 static bool _fle2_mongo_op_markings(mongocrypt_ctx_t *ctx, bson_t *out) {
     _mongocrypt_ctx_encrypt_t *ectx;
-    bson_t cmd_bson;
-    bson_t encrypted_field_config_bson;
+    bson_t cmd_bson = BSON_INITIALIZER, encrypted_field_config_bson = BSON_INITIALIZER;
 
     BSON_ASSERT_PARAM(ctx);
     BSON_ASSERT_PARAM(out);
@@ -628,7 +627,7 @@ static bool _create_markings_cmd_bson(mongocrypt_ctx_t *ctx, bson_t *out) {
 
     // For FLE1:
     // Get the original command document
-    bson_t bson_view;
+    bson_t bson_view = BSON_INITIALIZER;
     if (!_mongocrypt_buffer_to_bson(&ectx->original_cmd, &bson_view)) {
         _mongocrypt_ctx_fail_w_msg(ctx, "invalid BSON cmd");
         return false;
@@ -681,7 +680,7 @@ static bool _mongo_op_markings(mongocrypt_ctx_t *ctx, mongocrypt_binary_t *out) 
 
     if (_mongocrypt_buffer_empty(&ectx->mongocryptd_cmd)) {
         // We need to generate the command document
-        bson_t cmd_bson;
+        bson_t cmd_bson = BSON_INITIALIZER;
         if (!_create_markings_cmd_bson(ctx, &cmd_bson)) {
             // Failed
             bson_destroy(&cmd_bson);
