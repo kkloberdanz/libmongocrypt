@@ -652,6 +652,7 @@ static bool _create_markings_cmd_bson(mongocrypt_ctx_t *ctx, bson_t *out) {
     } else {
         bson_t empty = BSON_INITIALIZER;
         BSON_APPEND_DOCUMENT(out, "jsonSchema", &empty);
+        bson_destroy(&empty);
     }
 
     // if a local schema was not set, set isRemoteSchema=true
@@ -1590,6 +1591,7 @@ static bool FLE2RangeFindDriverSpec_to_ciphertexts(mongocrypt_ctx_t *ctx, mongoc
             goto fail;
         }
 
+        bson_destroy(&with_placholders);
         // Convert FLE2RangeFindDriverSpec into a document with placeholders.
         if (!mc_FLE2RangeFindDriverSpec_to_placeholders(
                 &rfds,

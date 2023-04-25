@@ -423,6 +423,8 @@ bool mc_FLE2RangeFindDriverSpec_to_placeholders(mc_FLE2RangeFindDriverSpec_t *sp
     bson_iter_t indexMin, indexMax;
     bool ok = false;
 
+    bson_init(out);
+
     BCON_APPEND(&infDoc, "p", BCON_DOUBLE(INFINITY), "n", BCON_DOUBLE(-INFINITY));
 
 #define TRY(stmt)                                                                                                      \
@@ -455,8 +457,6 @@ bool mc_FLE2RangeFindDriverSpec_to_placeholders(mc_FLE2RangeFindDriverSpec_t *sp
         TRY(bson_iter_init_find(&indexMin, &minMaxDoc, "indexMin"));
         TRY(bson_iter_init_find(&indexMax, &minMaxDoc, "indexMax"));
     }
-
-    bson_init(out);
 
     mc_makeRangeFindPlaceholder_args_t args = {.isStub = false,
                                                .user_key_id = user_key_id,
